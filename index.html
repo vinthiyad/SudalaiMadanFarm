@@ -1,0 +1,3247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudalai Madan Organic Farm — Vasavappapuram, Tuticorin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+:root {
+  --night:   #060d1a;
+  --deep:    #0a1628;
+  --navy:    #0d2444;
+  --ocean:   #0e3460;
+  --cyan:    #00b4db;
+  --cyan2:   #0083b0;
+  --teal:    #00d4aa;
+  --gold:    #f5c842;
+  --gold2:   #e0a820;
+  --cream:   #e8f4fc;
+  --white:   #ffffff;
+  --glass:   rgba(255,255,255,0.07);
+  --glass2:  rgba(255,255,255,0.12);
+  --border:  rgba(255,255,255,0.12);
+  --border2: rgba(0,180,219,0.35);
+  --shadow:  0 8px 32px rgba(0,0,0,0.45);
+  --glow:    0 0 40px rgba(0,180,219,0.18);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--night);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--cream);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ─── BACKGROUND ORBS ────────────────────────────────────────── */
+body::before, body::after {
+  content:'';
+  position:fixed;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:0;
+  filter:blur(100px);
+  opacity:0.18;
+}
+body::before {
+  width:700px; height:700px;
+  background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+  top:-200px; left:-200px;
+}
+body::after {
+  width:600px; height:600px;
+  background: radial-gradient(circle, var(--teal) 0%, transparent 70%);
+  bottom:-150px; right:-150px;
+}
+
+/* ─── NAVBAR ─────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(6,13,26,0.75);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 18px rgba(0,180,219,0.4);
+}
+.nav-brand-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--white);
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+.nav-brand-sub {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  padding: 4px;
+  backdrop-filter: blur(12px);
+}
+.nav-links a {
+  color: rgba(232,244,252,0.6);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 100px;
+  transition: all 0.22s cubic-bezier(.22,.68,0,1.2);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.nav-links a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.09);
+}
+.nav-cta {
+  background: linear-gradient(135deg, var(--cyan), var(--teal)) !important;
+  color: var(--night) !important;
+  font-weight: 700 !important;
+  padding: 7px 18px !important;
+  box-shadow: 0 0 14px rgba(0,180,219,0.3);
+}
+.nav-cta:hover { opacity:0.92; transform:scale(1.04); }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  width: 42px; height: 42px;
+  transition: all 0.2s;
+}
+.nav-hamburger:hover { background: rgba(255,255,255,0.1); }
+.nav-hamburger span {
+  display: block;
+  width: 18px; height: 2px;
+  background: var(--cream);
+  border-radius: 2px;
+  transition: all 0.32s cubic-bezier(.22,.68,0,1.2);
+  transform-origin: center;
+}
+/* X animation when open */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE NAV DROPDOWN PANEL ── */
+.nav-mobile-panel {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0;
+  z-index: 999;
+  background: rgba(6,13,26,0.97);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px);
+  border-bottom: 1px solid rgba(0,180,219,0.2);
+  padding: 20px 20px 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  transform: translateY(-12px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(.22,.68,0,1.2);
+}
+.nav-mobile-panel.open {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transform: translateY(0);
+  opacity: 1;
+}
+.nav-mobile-panel a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(232,244,252,0.75);
+  text-decoration: none;
+  font-family: 'Space Grotesk', sans-serif;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.2px;
+}
+.nav-mobile-panel a:hover,
+.nav-mobile-panel a:active {
+  background: rgba(0,180,219,0.08);
+  border-color: rgba(0,180,219,0.18);
+  color: var(--white);
+}
+.nav-mobile-panel .nav-mobile-icon {
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.nav-mobile-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  margin: 8px 0;
+}
+.nav-mobile-cta {
+  background: linear-gradient(135deg, var(--cyan), var(--teal)) !important;
+  color: var(--night) !important;
+  font-weight: 700 !important;
+  border-color: transparent !important;
+  justify-content: center;
+  margin-top: 4px;
+  box-shadow: 0 4px 20px rgba(0,180,219,0.3);
+}
+.nav-mobile-cta:hover { opacity: 0.92 !important; }
+
+/* ─── HERO VIDEO BACKGROUND ─────────────────────────────────── */
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-video-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6,13,26,0.84) 0%, rgba(6,13,26,0.60) 50%, rgba(6,13,26,0.80) 100%);
+}
+
+/* ─── HERO ───────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 100px 40px 60px;
+}
+
+/* animated grid */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,219,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,219,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 20s linear infinite;
+}
+@keyframes gridMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(60px); }
+}
+
+/* orbs */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+.hero-orb-1 {
+  width:500px; height:500px;
+  background: radial-gradient(circle, rgba(0,180,219,0.25) 0%, transparent 70%);
+  top:-100px; right:-100px;
+  animation-delay: 0s;
+}
+.hero-orb-2 {
+  width:400px; height:400px;
+  background: radial-gradient(circle, rgba(0,212,170,0.2) 0%, transparent 70%);
+  bottom:0; left:-100px;
+  animation-delay: -4s;
+}
+@keyframes float {
+  0%,100% { transform:translateY(0) scale(1); }
+  50% { transform:translateY(-30px) scale(1.05); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 860px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass);
+  border: 1px solid var(--border2);
+  backdrop-filter: blur(12px);
+  border-radius: 100px;
+  padding: 7px 18px;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  margin-bottom: 28px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(1.5); }
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 12px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+.hero-title-accent {
+  background: linear-gradient(135deg, var(--cyan), var(--teal), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  font-style: italic;
+}
+
+.hero-subtitle {
+  font-size: clamp(15px, 2.5vw, 20px);
+  color: rgba(232,244,252,0.9);
+  margin-bottom: 32px;
+  font-weight: 300;
+  line-height: 1.6;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+
+.hero-badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.hero-badge-highlight {
+  border-color: rgba(245,200,66,0.5);
+  color: var(--gold);
+}
+.hero-badge-teal {
+  border-color: rgba(0,212,170,0.4);
+  color: var(--teal);
+}
+
+.hero-cta-group {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--night);
+  border: none;
+  padding: 15px 34px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 24px rgba(0,180,219,0.35);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,180,219,0.5);
+}
+.btn-secondary {
+  background: var(--glass);
+  color: var(--cream);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  padding: 15px 34px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-secondary:hover {
+  background: var(--glass2);
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  animation: fadeIn 1s ease 1s both;
+}
+.scroll-mouse {
+  width: 22px; height: 36px;
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 11px;
+  position: relative;
+}
+.scroll-dot {
+  width: 4px; height: 8px;
+  background: var(--cyan);
+  border-radius: 2px;
+  position: absolute;
+  top: 5px; left: 50%;
+  transform: translateX(-50%);
+  animation: scrollDown 2s infinite;
+}
+@keyframes scrollDown {
+  0% { top:5px; opacity:1; }
+  100% { top:20px; opacity:0; }
+}
+.scroll-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* ─── PHOTO STRIP ────────────────────────────────────────────── */
+.photo-strip {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 70px;
+}
+.photo-strip-eyebrow {
+  text-align: center;
+  margin-bottom: 22px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.photo-strip-eyebrow::before,
+.photo-strip-eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border2));
+}
+.photo-strip-eyebrow::after {
+  background: linear-gradient(270deg, transparent, var(--border2));
+}
+.photo-strip-inner {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 0 40px 12px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.photo-strip-inner::-webkit-scrollbar { display: none; }
+.photo-strip-inner:active { cursor: grabbing; }
+.farm-photo {
+  flex-shrink: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--border);
+  transition: all 0.35s cubic-bezier(.22,.68,0,1.2);
+}
+.farm-photo:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--border2);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,180,219,0.12);
+}
+.farm-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.farm-photo:hover img { transform: scale(1.06); }
+.farm-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6,13,26,0.72) 0%, transparent 55%);
+  pointer-events: none;
+}
+.fp-label {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.fp-1 { width: 340px; height: 240px; }
+.fp-2 { width: 280px; height: 240px; }
+.fp-3 { width: 320px; height: 240px; }
+.fp-4 { width: 300px; height: 240px; }
+
+/* ─── STATS STRIP ────────────────────────────────────────────── */
+.stats-strip {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px;
+  margin-bottom: 100px;
+}
+.stats-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(24px);
+  border-radius: 20px;
+  padding: 36px 48px;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  box-shadow: var(--shadow), var(--glow);
+}
+.stat-item {
+  text-align: center;
+  padding: 10px 20px;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content:'';
+  position:absolute;
+  right:0; top:15%; bottom:15%;
+  width:1px;
+  background: var(--border);
+}
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-value span {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(232,244,252,0.5);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+}
+
+/* ─── SECTION WRAPPER ────────────────────────────────────────── */
+.section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 40px;
+}
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.section-eyebrow::before {
+  content:'';
+  width:28px; height:2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+  border-radius:1px;
+}
+
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-heading em {
+  font-style: italic;
+  color: var(--cyan);
+}
+
+.section-desc {
+  font-size: 16px;
+  color: rgba(232,244,252,0.78);
+  line-height: 1.7;
+  max-width: 560px;
+  font-weight: 300;
+  margin-bottom: 48px;
+}
+
+/* ─── GLASS CARD ─────────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  transition: all 0.35s cubic-bezier(.22,.68,0,1.2);
+}
+.glass-card:hover {
+  background: var(--glass2);
+  border-color: var(--border2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,180,219,0.1);
+}
+
+/* ─── FARM LAYOUT MAP ────────────────────────────────────────── */
+.map-section {
+  padding: 80px 40px;
+  position: relative;
+  z-index: 2;
+}
+.map-section::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,52,96,0.08) 50%, transparent 100%);
+  pointer-events:none;
+}
+
+.map-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, rgba(13,36,68,0.9), rgba(6,13,26,0.95));
+  border: 1px solid var(--border2);
+  border-radius: 28px;
+  padding: 40px;
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow), 0 0 80px rgba(0,180,219,0.07);
+  position: relative;
+  overflow: hidden;
+}
+.map-shell::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--teal), transparent);
+}
+
+.map-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.map-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white);
+}
+.map-subtitle {
+  font-size: 13px;
+  color: rgba(232,244,252,0.75);
+  margin-top: 3px;
+}
+.map-badge-acres {
+  background: linear-gradient(135deg, rgba(0,180,219,0.15), rgba(0,212,170,0.15));
+  border: 1px solid var(--border2);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.farm-grid {
+  display: grid;
+  grid-template-columns: 52px 1fr 52px;
+  grid-template-rows: 52px 1fr 52px;
+  gap: 8px;
+  min-height: 560px;
+}
+
+.border-strip {
+  background: linear-gradient(135deg, rgba(0,180,219,0.18), rgba(0,212,170,0.14));
+  border: 1px solid rgba(0,212,170,0.35);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  flex-wrap: wrap;
+}
+.border-strip-top, .border-strip-bottom { grid-column: 1/-1; }
+.border-strip-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  text-align: center;
+  opacity: 0.9;
+}
+.border-strip-side {
+  flex-direction: column;
+  gap: 5px;
+}
+.border-strip-side .border-strip-label {
+  writing-mode: vertical-rl;
+  font-size: 8px;
+}
+.bp { font-size: 14px; }
+
+.inner-farm {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.6fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 8px;
+}
+
+.fzone {
+  border-radius: 14px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: default;
+  backdrop-filter: blur(10px);
+}
+.fzone:hover { transform: scale(1.02); z-index:5; }
+.fzone::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+}
+
+.fzone-oil {
+  background: linear-gradient(145deg, rgba(245,200,66,0.2), rgba(224,168,32,0.14));
+  border: 1px solid rgba(245,200,66,0.45);
+  grid-row: 1/3;
+}
+.fzone-coconut {
+  background: linear-gradient(145deg, rgba(0,180,219,0.2), rgba(0,212,170,0.14));
+  border: 1px solid rgba(0,212,170,0.45);
+  grid-column: 2/4;
+}
+.fzone-chicken {
+  background: linear-gradient(145deg, rgba(255,140,0,0.2), rgba(200,100,0,0.14));
+  border: 1px solid rgba(255,140,0,0.45);
+  grid-column:2;
+  grid-row:2;
+}
+.fzone-papaya {
+  background: linear-gradient(145deg, rgba(0,212,170,0.18), rgba(0,180,219,0.14));
+  border: 1px solid rgba(0,180,219,0.4);
+  grid-column:3;
+  grid-row:2;
+}
+
+.fzone-icon { font-size: 28px; display:block; margin-bottom:6px; }
+.fzone-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 3px;
+}
+.fzone-acres {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(232,244,252,0.75);
+  margin-bottom: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.fzone-tags { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+.fzone-tag {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius:100px;
+  padding: 2px 9px;
+  font-size: 10px;
+  color: var(--white);
+}
+.fzone-income {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5fffd8;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-top: 4px;
+}
+
+.oil-strips { display:flex; flex-direction:column; gap:5px; margin-top:8px; }
+.oil-strip {
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.os-sesame { background: rgba(245,200,66,0.2); }
+.os-gnut   { background: rgba(180,120,60,0.24); }
+.os-lemon  { background: rgba(0,212,170,0.18); }
+.os-label { color: var(--white); flex:1; font-weight: 500; }
+.os-tag {
+  font-size: 9px;
+  background: rgba(245,200,66,0.28);
+  border: 1px solid rgba(245,200,66,0.5);
+  border-radius:3px;
+  padding:1px 5px;
+  color: #ffe57a;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight:700;
+}
+
+.map-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  color: rgba(232,244,252,0.8);
+}
+.legend-dot {
+  width:10px; height:10px;
+  border-radius:3px;
+  flex-shrink:0;
+}
+
+/* ─── ZERO WASTE ECOSYSTEM ───────────────────────────────────── */
+/* ─── ECOSYSTEM WHEEL ────────────────────────────────────────── */
+.eco-wheel-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+.eco-wheel-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.eco-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  background: linear-gradient(135deg, rgba(0,180,219,0.18), rgba(0,212,170,0.14));
+  border: 1px solid rgba(0,212,170,0.35);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  z-index: 3;
+  box-shadow: 0 0 40px rgba(0,180,219,0.15), inset 0 0 20px rgba(0,180,219,0.06);
+}
+.eco-center-icon { font-size: 28px; line-height:1; }
+.eco-center-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-top: 5px;
+  line-height: 1.3;
+  padding: 0 8px;
+}
+/* 6 orbit nodes absolutely positioned */
+.eco-orbit-node {
+  position: absolute;
+  width: 108px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 13px 10px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(.22,.68,0,1.2);
+  z-index: 2;
+  cursor: default;
+}
+.eco-orbit-node:hover {
+  background: var(--glass2);
+  border-color: var(--border2);
+  transform: scale(1.08);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 16px rgba(0,180,219,0.1);
+  z-index: 10;
+}
+.eco-orbit-node .eco-icon { font-size: 26px; display:block; margin-bottom:5px; }
+.eco-orbit-node .eco-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--cream);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+.eco-orbit-node .eco-sub {
+  font-size: 8.5px;
+  color: rgba(232,244,252,0.65);
+  line-height: 1.35;
+}
+/* position each node on the circle — centred by translate(-50%,-50%) */
+.eco-n0 { top: 2%;  left: 50%; transform: translate(-50%,-50%); }
+.eco-n1 { top: 25%; left: 91%; transform: translate(-50%,-50%); }
+.eco-n2 { top: 75%; left: 91%; transform: translate(-50%,-50%); }
+.eco-n3 { top: 98%; left: 50%; transform: translate(-50%,-50%); }
+.eco-n4 { top: 75%; left: 9%;  transform: translate(-50%,-50%); }
+.eco-n5 { top: 25%; left: 9%;  transform: translate(-50%,-50%); }
+.eco-n0:hover { transform: translate(-50%,-50%) scale(1.09); }
+.eco-n1:hover { transform: translate(-50%,-50%) scale(1.09); }
+.eco-n2:hover { transform: translate(-50%,-50%) scale(1.09); }
+.eco-n3:hover { transform: translate(-50%,-50%) scale(1.09); }
+.eco-n4:hover { transform: translate(-50%,-50%) scale(1.09); }
+.eco-n5:hover { transform: translate(-50%,-50%) scale(1.09); }
+/* step number badge */
+.eco-step {
+  display: inline-block;
+  width: 17px; height: 17px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--night);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 17px;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+/* ─── FISH PONDS ─────────────────────────────────────────────── */
+.fish-section {
+  background: linear-gradient(180deg, transparent, rgba(0,52,96,0.15), transparent);
+}
+
+.ponds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.pond-card {
+  background: linear-gradient(145deg, rgba(0,52,96,0.6), rgba(6,13,26,0.8));
+  border: 1px solid rgba(0,180,219,0.3);
+  border-radius: 24px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  transition: all 0.35s;
+}
+.pond-card:hover {
+  border-color: rgba(0,180,219,0.6);
+  transform: translateY(-5px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0,180,219,0.12);
+}
+.pond-card::before {
+  content:'';
+  position:absolute;
+  bottom:-60px; right:-60px;
+  width:200px; height:200px;
+  background: radial-gradient(circle, rgba(0,180,219,0.12) 0%, transparent 70%);
+  border-radius:50%;
+}
+.pond-ripple {
+  position:absolute;
+  top:0; left:0; right:0; bottom:0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 18px,
+    rgba(0,180,219,0.02) 19px
+  );
+  pointer-events:none;
+}
+.pond-number {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk',sans-serif;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pond-number::before {
+  content:'';
+  width:20px; height:1px;
+  background: var(--cyan);
+  opacity:0.5;
+}
+.pond-title {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.pond-desc {
+  font-size: 13px;
+  color: rgba(232,244,252,0.8);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.fish-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fish-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 14px;
+  transition: all 0.25s;
+  flex-wrap: nowrap;
+}
+.fish-item:hover {
+  background: rgba(0,180,219,0.08);
+  border-color: rgba(0,180,219,0.2);
+}
+.fish-emoji { font-size: 20px; flex-shrink: 0; }
+.fish-info { flex: 1; min-width: 0; }
+.fish-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 2px;
+  font-family: 'Space Grotesk', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fish-tamil {
+  font-size: 10px;
+  color: var(--cyan);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fish-badge {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-family: 'Space Grotesk', sans-serif;
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.fish-badge-premium {
+  background: rgba(245,200,66,0.18);
+  border: 1px solid rgba(245,200,66,0.45);
+  color: var(--gold);
+}
+.fish-badge-native {
+  background: rgba(0,212,170,0.15);
+  border: 1px solid rgba(0,212,170,0.4);
+  color: var(--teal);
+}
+
+.pond-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.pond-stat {
+  text-align:center;
+}
+.pond-stat-val {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+.pond-stat-lbl {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(232,244,252,0.7);
+  font-family: 'Space Grotesk',sans-serif;
+}
+
+.fish-highlight-strip {
+  background: linear-gradient(135deg, rgba(0,180,219,0.08), rgba(0,212,170,0.06));
+  border: 1px solid rgba(0,212,170,0.2);
+  border-radius: 20px;
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.fish-highlight-icon { font-size: 52px; }
+.fish-highlight-text { flex:1; }
+.fish-highlight-title {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.fish-highlight-desc {
+  font-size: 14px;
+  color: rgba(232,244,252,0.6);
+  line-height: 1.7;
+}
+.fish-highlight-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.fht {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-size: 11px;
+  color: rgba(232,244,252,0.7);
+  font-family:'Space Grotesk',sans-serif;
+}
+
+/* ─── PRODUCTS ───────────────────────────────────────────────── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+  gap: 16px;
+}
+.product-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px;
+  padding: 26px;
+  backdrop-filter: blur(16px);
+  transition: all 0.35s cubic-bezier(.22,.68,0,1.2);
+  position: relative;
+  overflow: hidden;
+}
+.product-card:hover {
+  background: rgba(255,255,255,0.13);
+  border-color: var(--border2);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,180,219,0.1);
+}
+.product-card::after {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(0,180,219,0.4), transparent);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.product-card:hover::after { opacity:1; }
+
+.pc-emoji { font-size: 34px; display:block; margin-bottom:14px; }
+.pc-name {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.pc-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+.pc-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(232,244,252,0.85);
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.pc-list li:last-child { border-bottom:none; }
+.pc-price {
+  font-weight: 700;
+  color: #5fffd8;
+  font-family: 'Space Grotesk',sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* ─── CROP CALENDAR (Months = Rows, Strips = Columns) ───────── */
+.cal-shell {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  backdrop-filter: blur(20px);
+}
+/* Outer wrapper — scrolls on tiny screens if needed */
+.cal-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.cal-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+  min-width: 340px;
+}
+/* Month column header (left) */
+.cal-table th.th-month {
+  text-align: left;
+  padding: 0 14px 10px 0;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(232,244,252,0.4);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+/* Strip column headers */
+.cal-table th.th-strip {
+  text-align: center;
+  padding: 0 6px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+/* Month label cell */
+.cal-table td.td-month {
+  padding: 5px 14px 5px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(232,244,252,0.55);
+  font-family: 'Space Grotesk', sans-serif;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+/* Activity cells */
+.cal-table td.td-cell {
+  padding: 4px 5px;
+  text-align: center;
+  border-radius: 8px;
+}
+/* Activity pill inside cell */
+.cal-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 100px;
+  padding: 7px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  white-space: nowrap;
+  width: 100%;
+  min-width: 80px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s;
+}
+.cal-pill:hover { transform: scale(1.03); }
+
+.pill-harvest {
+  background: rgba(245,200,66,0.28);
+  border: 1.5px solid rgba(245,200,66,0.7);
+  color: #ffe57a;
+  box-shadow: 0 0 10px rgba(245,200,66,0.15);
+}
+.pill-sesame {
+  background: rgba(0,212,170,0.25);
+  border: 1.5px solid rgba(0,212,170,0.65);
+  color: #5fffd8;
+  box-shadow: 0 0 10px rgba(0,212,170,0.12);
+}
+.pill-groundnut {
+  background: rgba(200,140,60,0.28);
+  border: 1.5px solid rgba(200,140,60,0.65);
+  color: #f0c07a;
+  box-shadow: 0 0 10px rgba(200,140,60,0.12);
+}
+.pill-rain {
+  background: rgba(0,180,219,0.22);
+  border: 1.5px solid rgba(0,180,219,0.6);
+  color: #7adfff;
+  box-shadow: 0 0 10px rgba(0,180,219,0.12);
+}
+.pill-rest {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(232,244,252,0.35);
+}
+/* Month label — brighter white with cyan left accent */
+.cal-table td.td-month {
+  padding: 5px 16px 5px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  white-space: nowrap;
+  letter-spacing: 0.8px;
+  border-left: 2px solid rgba(0,180,219,0.3);
+  padding-left: 10px;
+}
+/* Strip headers brighter */
+.cal-table th.th-strip {
+  text-align: center;
+  padding: 0 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgba(0,180,219,0.3);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.cal-table th.th-month {
+  text-align: left;
+  padding: 0 14px 14px 10px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 2px solid rgba(0,180,219,0.3);
+}
+/* Zebra row tinting for readability */
+.cal-table tbody tr:nth-child(odd) td { background: rgba(255,255,255,0.015); }
+.cal-table tbody tr:hover td { background: rgba(0,180,219,0.05) !important; }
+
+.cal-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.cal-leg-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: rgba(232,244,252,0.5);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.cal-dot { width:10px; height:10px; border-radius:3px; }
+
+/* ─── CONTACT ────────────────────────────────────────────────── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.contact-info {
+  background: linear-gradient(145deg, rgba(0,52,96,0.5), rgba(6,13,26,0.7));
+  border: 1px solid var(--border2);
+  border-radius: 24px;
+  padding: 42px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+.contact-info::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background: linear-gradient(90deg, var(--cyan), var(--teal));
+}
+.contact-heading {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.contact-sub {
+  font-size: 14px;
+  color: rgba(232,244,252,0.8);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+.contact-detail {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.contact-icon-box {
+  width: 44px; height: 44px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 18px;
+  flex-shrink:0;
+}
+.contact-detail-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk',sans-serif;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.contact-detail-value {
+  font-size: 14px;
+  color: var(--cream);
+  line-height: 1.6;
+}
+.contact-detail-value a {
+  color: var(--teal);
+  text-decoration: none;
+}
+.contact-detail-value a:hover { text-decoration: underline; }
+
+.contact-map-placeholder {
+  background: linear-gradient(145deg, rgba(0,180,219,0.08), rgba(0,52,96,0.5));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  gap: 18px;
+}
+.contact-map-icon { font-size: 64px; opacity:0.8; }
+.contact-map-title {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+}
+.contact-map-sub {
+  font-size: 14px;
+  color: rgba(232,244,252,0.8);
+  line-height: 1.6;
+  max-width: 280px;
+}
+.contact-visit-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.cvt {
+  background: rgba(0,180,219,0.18);
+  border: 1px solid rgba(0,180,219,0.45);
+  border-radius:100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: #7adfff;
+  font-family:'Space Grotesk',sans-serif;
+  font-weight: 600;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid var(--border);
+  padding: 60px 40px 36px;
+}
+footer::before {
+  content:'';
+  position:absolute;
+  top:0; left:20%; right:20%;
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--teal), transparent);
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand { }
+.footer-brand-name {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.footer-brand-name span { color: var(--cyan); }
+.footer-brand-sub {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(232,244,252,0.65);
+  font-family: 'Space Grotesk',sans-serif;
+  margin-bottom: 16px;
+}
+.footer-tagline {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(232,244,252,0.85);
+  line-height: 1.5;
+  max-width: 280px;
+}
+.footer-col-title {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk',sans-serif;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.footer-links { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-links a {
+  font-size: 14px;
+  color: rgba(232,244,252,0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy {
+  font-size: 12px;
+  color: rgba(232,244,252,0.55);
+  font-family: 'Space Grotesk',sans-serif;
+}
+.footer-badges {
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.footer-badge {
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: rgba(232,244,252,0.5);
+  font-family: 'Space Grotesk',sans-serif;
+}
+
+/* ─── POND VIDEO SECTION ────────────────────────────────────── */
+.pond-video-section {
+  position: relative;
+  z-index: 2;
+  padding: 0 40px 80px;
+}
+.pond-video-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+  box-shadow: var(--shadow), 0 0 60px rgba(0,180,219,0.1);
+}
+.pond-video-wrap video {
+  width: 100%;
+  display: block;
+  max-height: 560px;
+  object-fit: cover;
+}
+.pond-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6,13,26,0.78) 0%, transparent 40%, transparent 60%, rgba(6,13,26,0.38) 100%);
+  pointer-events: none;
+}
+.pond-video-ctrl {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s;
+  z-index: 3;
+}
+.pond-video-ctrl:hover {
+  background: rgba(0,180,219,0.25);
+  border-color: var(--cyan);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+.pvctrl-icon { font-size: 22px; color: var(--white); }
+.pond-video-badge {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  background: rgba(0,180,219,0.18);
+  border: 1px solid rgba(0,180,219,0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 11px;
+  color: #7adfff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 3;
+}
+.pvb-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2s infinite;
+}
+.pond-video-label {
+  position: absolute;
+  bottom: 28px;
+  left: 36px;
+  z-index: 3;
+}
+.pvl-eyebrow {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.pvl-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+}
+.pvl-sub {
+  font-size: 14px;
+  color: rgba(232,244,252,0.82);
+  margin-top: 6px;
+}
+
+/* ─── FLOATING BUTTONS ───────────────────────────────────────── */
+.fab-group {
+  position: fixed;
+  bottom: 32px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.fab {
+  width: 50px; height: 50px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 20px;
+  transition: all 0.3s cubic-bezier(.22,.68,0,1.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  text-decoration: none;
+}
+.fab:hover { transform:translateY(-3px) scale(1.08); }
+.fab-up {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--night);
+  opacity: 0;
+  pointer-events:none;
+  transition: all 0.3s;
+}
+.fab-up.visible { opacity:1; pointer-events:all; }
+.fab-email {
+  background: var(--glass2);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  color: var(--cream);
+}
+.fab-chat {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+/* ─── CHATBOT ────────────────────────────────────────────────── */
+.chatbot-window {
+  position: fixed;
+  bottom: 24px;
+  right: 90px;          /* sits LEFT of the 50px FAB + 24px right + 16px gap */
+  width: 340px;
+  max-height: 520px;
+  z-index: 9998;
+  background: rgba(10,22,40,0.97);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.85) translateX(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(.22,.68,0,1.2);
+  transform-origin: bottom right;
+}
+.chatbot-window.open {
+  transform: scale(1) translateX(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.chatbot-header {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chatbot-avatar {
+  width:36px; height:36px;
+  background: rgba(255,255,255,0.2);
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+}
+.chatbot-title { font-weight:700; font-size:14px; color:var(--night); font-family:'Space Grotesk',sans-serif; }
+.chatbot-status { font-size:10px; color:rgba(6,13,26,0.65); display:flex; align-items:center; gap:4px; }
+.chatbot-online { width:6px;height:6px;border-radius:50%;background:var(--night);opacity:0.7; animation:pulse 2s infinite; }
+.chatbot-close-btn {
+  margin-left:auto;
+  background:rgba(255,255,255,0.2);
+  border:none;
+  color:var(--night);
+  border-radius:8px;
+  padding:4px 10px;
+  font-size:14px;
+  cursor:pointer;
+  font-weight:700;
+}
+.chatbot-messages {
+  flex:1;
+  overflow-y:auto;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  scrollbar-width:thin;
+  scrollbar-color: var(--border) transparent;
+}
+.chat-msg {
+  max-width:80%;
+  padding:10px 14px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.5;
+}
+.chat-msg-bot {
+  background: rgba(0,180,219,0.12);
+  border: 1px solid rgba(0,180,219,0.2);
+  color: var(--cream);
+  border-radius:12px 12px 12px 4px;
+  align-self:flex-start;
+}
+.chat-msg-user {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  color: var(--night);
+  font-weight:500;
+  border-radius:12px 12px 4px 12px;
+  align-self:flex-end;
+}
+.chat-quick-btns {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:0 16px 12px;
+}
+.chat-quick-btn {
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:100px;
+  padding:5px 12px;
+  font-size:11px;
+  color:var(--cream);
+  cursor:pointer;
+  transition:all 0.2s;
+  font-family:'DM Sans',sans-serif;
+}
+.chat-quick-btn:hover { background:var(--glass2); border-color:var(--border2); color:var(--cyan); }
+.chatbot-input-row {
+  padding:12px 16px;
+  border-top:1px solid var(--border);
+  display:flex;
+  gap:8px;
+}
+.chatbot-input {
+  flex:1;
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:9px 14px;
+  color:var(--cream);
+  font-size:13px;
+  font-family:'DM Sans',sans-serif;
+  outline:none;
+  transition:border 0.2s;
+}
+.chatbot-input:focus { border-color:var(--border2); }
+.chatbot-input::placeholder { color:rgba(232,244,252,0.3); }
+.chatbot-send {
+  background: linear-gradient(135deg, var(--cyan), var(--teal));
+  border:none;
+  border-radius:10px;
+  padding:9px 14px;
+  color:var(--night);
+  font-weight:700;
+  cursor:pointer;
+  font-size:15px;
+  transition:all 0.2s;
+}
+.chatbot-send:hover { opacity:0.88; transform:scale(1.05); }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+.reveal {
+  opacity:0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ─── SECTION DIVIDER ────────────────────────────────────────── */
+.s-divider {
+  max-width:1100px;
+  margin:0 auto;
+  height:1px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+}
+
+/* ─── MOBILE ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none !important; }
+  .nav-hamburger { display: flex; }
+  .hero { padding:100px 24px 60px; }
+  .stats-strip { padding:0 20px; }
+  .stats-inner { grid-template-columns:1fr 1fr; padding:24px; gap:16px; }
+  .stat-item:not(:last-child)::after { display:none; }
+  .stat-item { padding:10px; border-bottom:1px solid var(--border); }
+  .stat-item:nth-child(2n):not(:last-child) { border-right:none; }
+  .section { padding:60px 20px; }
+  .map-section { padding:60px 20px; }
+  .ponds-grid { grid-template-columns:1fr; }
+  .contact-grid { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; gap:32px; }
+  .chatbot-window {
+    width: calc(100vw - 32px);
+    right: 8px;
+    bottom: 110px;
+    max-height: 60vh;
+    transform-origin: bottom center;
+  }
+  .footer-bottom { flex-direction:column; align-items:flex-start; }
+  .map-shell { padding:20px 14px; }
+  .pond-card { padding:24px; }
+  .contact-info { padding:28px; }
+}
+
+/* ══════════════════════════════════════════════
+   MOBILE — all 5 problem sections fully fixed
+   ══════════════════════════════════════════════ */
+@media (max-width: 600px) {
+
+  /* ── GENERAL ── */
+  .hero-title { font-size: 36px; }
+  .fab-group { bottom:24px; right:16px; }
+  .hero-badges { flex-direction:column; align-items:center; }
+  .hero-cta-group { flex-direction:column; align-items:stretch; width:100%; max-width:300px; margin:0 auto; }
+  .btn-primary, .btn-secondary { justify-content:center; }
+
+  /* ─────────────────────────────────────────────
+     1. 10-ACRE FARM LAYOUT
+        Remove 3-col grid entirely on mobile.
+        Stack border strips + inner zones as cards.
+  ───────────────────────────────────────────── */
+  .map-shell { padding:18px 12px; border-radius:18px; }
+  .map-title-row { flex-direction:column; align-items:flex-start; gap:10px; }
+  .map-title { font-size:22px; }
+
+  /* Kill the CSS grid — turn into vertical stack */
+  .farm-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* Hide the side border strips — too narrow on mobile */
+  .border-strip-side { display:none !important; }
+
+  /* Top/Bottom border strips: smaller text, wrap nicely */
+  .border-strip-top,
+  .border-strip-bottom {
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+  .border-strip-label { font-size:9px; letter-spacing:1px; line-height:1.5; }
+
+  /* Inner farm — single column stack */
+  .inner-farm {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* All zones full width, reset any grid placement */
+  .fzone { grid-column: unset !important; grid-row: unset !important; border-radius:12px; padding:16px; }
+  .fzone-icon { font-size:24px; }
+  .fzone-name { font-size:15px; }
+  .fzone-acres { font-size:9px; }
+  .fzone-income { font-size:10px; }
+  .oil-strips { gap:4px; }
+  .oil-strip { padding:4px 8px; font-size:9px; }
+
+  /* Legend — 2 col grid */
+  .map-legend { grid-template-columns:1fr 1fr; gap:6px; margin-top:14px; padding-top:14px; }
+  .legend-row { font-size:10px; gap:6px; }
+
+  /* ─────────────────────────────────────────────
+     2. ZERO WASTE ECOSYSTEM — "Every output feeds"
+        Horizontal scroll row → vertical stack
+  ───────────────────────────────────────────── */
+  .eco-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+    overflow-x: visible !important;
+    padding: 0 !important;
+  }
+
+  /* Arrows: rotate 90° to point down */
+  .eco-arrow {
+    display: flex !important;
+    justify-content: center;
+    font-size: 18px;
+    padding: 4px 0;
+    transform: rotate(90deg);
+    opacity: 0.5;
+  }
+
+  /* Each node full width */
+  .eco-node {
+    min-width: unset !important;
+    width: 100% !important;
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+  }
+  .eco-icon { font-size:28px; flex-shrink:0; margin-bottom:0; }
+  .eco-label { font-size:13px; margin-bottom:2px; }
+  .eco-sub { font-size:11px; }
+
+  /* ─────────────────────────────────────────────
+     3. "WHY OUR MURREL IS DIFFERENT"
+        fish-highlight-strip — column stack
+  ───────────────────────────────────────────── */
+  .fish-highlight-strip {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 24px 20px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+  .fish-highlight-icon { font-size:40px; }
+  .fish-highlight-title { font-size:20px; }
+  .fish-highlight-desc { font-size:13px; }
+  .fish-highlight-tags { gap:6px; }
+  .fht { font-size:10px; padding:3px 10px; }
+
+  /* ─────────────────────────────────────────────
+     4. COMPLETE B2C PRODUCTS
+        2-col messy → 1 column, clean cards
+  ───────────────────────────────────────────── */
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  .product-card { padding:20px; border-radius:16px; }
+  .pc-emoji { font-size:28px; margin-bottom:10px; }
+  .pc-name { font-size:18px; margin-bottom:10px; }
+  .pc-list li { font-size:12px; padding-bottom:5px; }
+  .pc-price { font-size:10px; }
+
+  /* ─────────────────────────────────────────────
+     5. CROP ROTATION CALENDAR
+        Horizontal scroll container, readable cells
+  ───────────────────────────────────────────── */
+  .cal-shell {
+    padding: 18px 12px;
+    border-radius: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hint that the table scrolls sideways */
+  .cal-shell::before {
+    content: '← Scroll to see full calendar →';
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(232,244,252,0.3);
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 12px;
+  }
+
+  .cal-table { min-width: 620px; font-size:11px; }
+  .cal-table th { padding:8px 5px; font-size:10px; }
+  .cal-table td { padding:7px 4px; font-size:12px; }
+  .td-label { font-size:10px; padding-left:8px !important; }
+
+  /* Calendar legend — 2 col */
+  .cal-legend { gap:10px; margin-top:12px; }
+  .cal-leg-item { font-size:10px; gap:5px; }
+  .cal-dot { width:8px; height:8px; }
+  /* Photo strip mobile */
+  .photo-strip-inner { padding: 0 20px 12px; }
+  .fp-1, .fp-2, .fp-3, .fp-4 { height: 195px; width: 260px; }
+  /* Pond video mobile */
+  .pond-video-section { padding: 0 20px 60px; }
+  .pond-video-label { left: 20px; bottom: 20px; }
+  .pvl-title { font-size: 22px; }
+  .pond-video-badge { top: 14px; right: 14px; font-size: 10px; padding: 6px 12px; }
+  .pond-video-ctrl { width: 52px; height: 52px; }
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:var(--night); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:var(--border2); }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ──────────────────────────────────────────────────────── -->
+<nav id="navbar">
+  <a href="#" class="nav-brand">
+    <div class="nav-logo-icon">🌿</div>
+    <div>
+      <div class="nav-brand-text">Sudalai Madan Organic Farm</div>
+      <div class="nav-brand-sub">Vasavappapuram · Tuticorin</div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#farm-layout">Farm</a></li>
+    <li><a href="#ecosystem">Ecosystem</a></li>
+    <li><a href="#fish-ponds">Fish Ponds</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#contact" class="nav-cta">Visit Farm</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ── MOBILE NAV PANEL ── -->
+<div class="nav-mobile-panel" id="mobilePanel">
+  <a href="#farm-layout" onclick="closeNav()">
+    <span class="nav-mobile-icon">🗺</span> Farm Layout
+  </a>
+  <a href="#ecosystem" onclick="closeNav()">
+    <span class="nav-mobile-icon">♻️</span> Ecosystem
+  </a>
+  <a href="#fish-ponds" onclick="closeNav()">
+    <span class="nav-mobile-icon">🐟</span> Fish Ponds
+  </a>
+  <a href="#products" onclick="closeNav()">
+    <span class="nav-mobile-icon">🛒</span> Products
+  </a>
+  <a href="#calendar" onclick="closeNav()">
+    <span class="nav-mobile-icon">📅</span> Crop Calendar
+  </a>
+  <div class="nav-mobile-divider"></div>
+  <a href="#contact" class="nav-mobile-cta" onclick="closeNav()">
+    🌿 Visit the Farm
+  </a>
+</div>
+
+<!-- ── HERO ─────────────────────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <!-- ★ HERO BACKGROUND VIDEO — keep SM1.mp4 in same folder ★ -->
+  <div class="hero-video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="SM1.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+  </div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Vasavappapuram · Near Perumal Kovil · Tuticorin
+    </div>
+
+    <h1 class="hero-title">
+      Sudalai Madan
+      <span class="hero-title-accent">Organic Farm</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      10 acres of pure nature. No chemicals, no middlemen — only<br>
+      honest earth and the finest produce from Tuticorin's heartland.
+    </p>
+
+    <div class="hero-badges">
+      <div class="hero-badge">
+        🌿 Zero Chemical
+      </div>
+      <div class="hero-badge hero-badge-highlight">
+        ✦ 100% B2C
+      </div>
+      <div class="hero-badge hero-badge-teal">
+        🐟 Live Fish Ponds
+      </div>
+      <div class="hero-badge">
+        🛢️ Cold Press Oils
+      </div>
+    </div>
+
+    <div class="hero-cta-group">
+      <a href="#contact" class="btn-primary">
+        🗺 Visit the Farm
+      </a>
+      <a href="#products" class="btn-secondary">
+        Explore Products →
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <div class="scroll-label">Scroll</div>
+  </div>
+</section>
+
+<!-- ── STATS ─────────────────────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="stats-inner reveal">
+    <div class="stat-item">
+      <div class="stat-value"><span>10</span></div>
+      <div class="stat-label">Acres of Farm</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span>17+</span></div>
+      <div class="stat-label">B2C Products</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span>2</span></div>
+      <div class="stat-label">Live Fish Ponds</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value"><span>0</span></div>
+      <div class="stat-label">Chemicals Used</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PHOTO STRIP ─────────────────────────────────────────────────── -->
+<div class="photo-strip">
+  <div class="photo-strip-eyebrow">Life on the Farm</div>
+  <div class="photo-strip-inner" id="photoStrip">
+    <div class="farm-photo fp-1">
+      <img src="SM1.jpeg" alt="The Farm" loading="lazy">
+      <div class="farm-photo-overlay"></div>
+      <div class="fp-label">The Farm</div>
+    </div>
+    <div class="farm-photo fp-2">
+      <img src="SM2.jpeg" alt="Fish Ponds" loading="lazy">
+      <div class="farm-photo-overlay"></div>
+      <div class="fp-label">Farm Eggs</div>
+    </div>
+    <div class="farm-photo fp-3">
+      <img src="SM3.jpeg" alt="Our Produce" loading="lazy">
+      <div class="farm-photo-overlay"></div>
+      <div class="fp-label">Our Produce</div>
+    </div>
+    <div class="farm-photo fp-4">
+      <img src="SM4.jpeg" alt="Farm Life" loading="lazy">
+      <div class="farm-photo-overlay"></div>
+      <div class="fp-label">Farm Life</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FARM LAYOUT ────────────────────────────────────────────────────── -->
+<section class="map-section" id="farm-layout">
+  <div class="map-shell reveal">
+    <div class="map-title-row">
+      <div>
+        <div class="map-title">🗺 10-Acre Farm Layout</div>
+        <div class="map-subtitle">Every corner purposeful — oil, coconut, poultry, papaya</div>
+      </div>
+      <div class="map-badge-acres">10 Acres · Vasavappapuram</div>
+    </div>
+
+    <div class="farm-grid">
+
+      <div class="border-strip border-strip-top">
+        <div class="border-strip-label">🪔 Castor · 🌳 Neem · 🌿 Lemongrass · 🥢 Drumstick / Moringa · 🌿 Curry Leaf — Border Plantation</div>
+      </div>
+
+      <div class="border-strip border-strip-side">
+        <span class="bp">🪔</span><span class="bp">🌳</span><span class="bp">🌿</span><span class="bp">🥢</span>
+        <div class="border-strip-label">Borders</div>
+      </div>
+
+      <div class="inner-farm">
+
+        <!-- OIL STRIPS -->
+        <div class="fzone fzone-oil">
+          <span class="fzone-icon">🛢️</span>
+          <div class="fzone-name">Oil Crop Strips</div>
+          <div class="fzone-acres">1 Acre · Raised Granite Beds</div>
+          <div class="oil-strips">
+            <div class="oil-strip os-sesame">
+              <span>🌾</span>
+              <span class="os-label">Sesame Strip</span>
+              <span class="os-tag">Removable</span>
+            </div>
+            <div class="oil-strip os-gnut">
+              <span>🥜</span>
+              <span class="os-label">Groundnut Strip</span>
+              <span class="os-tag">Removable</span>
+            </div>
+            <div class="oil-strip os-sesame">
+              <span>🌾</span>
+              <span class="os-label">Sesame Strip</span>
+              <span class="os-tag">Removable</span>
+            </div>
+            <div class="oil-strip os-gnut">
+              <span>🥜</span>
+              <span class="os-label">Groundnut Strip</span>
+              <span class="os-tag">Removable</span>
+            </div>
+            <div class="oil-strip os-lemon">
+              <span>🌿</span>
+              <span class="os-label">Lemongrass Borders</span>
+            </div>
+          </div>
+          <div class="fzone-income">₹15–18L / year · 200L oil / month</div>
+        </div>
+
+        <!-- COCONUT -->
+        <div class="fzone fzone-coconut">
+          <div style="position:absolute;top:12px;right:14px;font-size:18px;">🐝</div>
+          <span class="fzone-icon">🌴</span>
+          <div class="fzone-name">Coconut Plantation</div>
+          <div class="fzone-acres">5–6 Acres · Multi-Layer System</div>
+          <div class="fzone-tags">
+            <span class="fzone-tag">🌴 Coconut (top)</span>
+            <span class="fzone-tag">🌿 Pepper (climbing)</span>
+            <span class="fzone-tag">🌰 Nutmeg (shade)</span>
+            <span class="fzone-tag">🍈 Papaya (rows)</span>
+            <span class="fzone-tag">🌿 Moringa (gaps)</span>
+            <span class="fzone-tag">🐝 10–15 Beehives</span>
+          </div>
+          <div class="fzone-income">₹30–45L / year</div>
+        </div>
+
+        <!-- CHICKEN -->
+        <div class="fzone fzone-chicken">
+          <span class="fzone-icon">🐔</span>
+          <div class="fzone-name">Free Range Nattu Kozhi</div>
+          <div class="fzone-acres">Roams Entire Farm</div>
+          <div class="fzone-tags">
+            <span class="fzone-tag">Country Chicken</span>
+            <span class="fzone-tag">Native Eggs</span>
+            <span class="fzone-tag">Zero Feed Cost</span>
+          </div>
+          <div class="fzone-income">₹20–30L / year</div>
+        </div>
+
+        <!-- PAPAYA -->
+        <div class="fzone fzone-papaya">
+          <span class="fzone-icon">🍈</span>
+          <div class="fzone-name">Papaya</div>
+          <div class="fzone-acres">Between Coconut Rows</div>
+          <div class="fzone-tags">
+            <span class="fzone-tag">Fresh Fruit</span>
+            <span class="fzone-tag">Dried Strips</span>
+            <span class="fzone-tag">Seed Powder</span>
+          </div>
+          <div class="fzone-income">₹7–12L / year</div>
+        </div>
+
+      </div><!-- inner-farm -->
+
+      <div class="border-strip border-strip-side">
+        <span class="bp">🪔</span><span class="bp">🌳</span><span class="bp">🌿</span><span class="bp">🥢</span>
+        <div class="border-strip-label">Borders</div>
+      </div>
+
+      <div class="border-strip border-strip-bottom">
+        <div class="border-strip-label">🪔 Castor · 🌳 Neem · 🌿 Lemongrass · 🥢 Drumstick / Moringa · 🌿 Curry Leaf — Border Plantation</div>
+      </div>
+
+    </div><!-- farm-grid -->
+
+    <div class="map-legend">
+      <div class="legend-row"><div class="legend-dot" style="background:rgba(245,200,66,0.6)"></div>Oil Crop Strips</div>
+      <div class="legend-row"><div class="legend-dot" style="background:rgba(0,212,170,0.6)"></div>Coconut Plantation</div>
+      <div class="legend-row"><div class="legend-dot" style="background:rgba(255,140,0,0.6)"></div>Free Range Chicken</div>
+      <div class="legend-row"><div class="legend-dot" style="background:rgba(0,180,219,0.6)"></div>Papaya Zone</div>
+      <div class="legend-row"><div class="legend-dot" style="background:rgba(0,180,219,0.3);border:1px solid var(--teal)"></div>Border Plantation</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ZERO WASTE ECOSYSTEM ───────────────────────────────────────────── -->
+<section class="section" id="ecosystem">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Zero Waste Philosophy</div>
+      <h2 class="section-heading">Every output feeds<br><em>something else</em></h2>
+      <p class="section-desc">A closed-loop farm where nothing is wasted — every byproduct becomes a resource for another part of the ecosystem.</p>
+    </div>
+
+    <div class="eco-wheel-wrap reveal">
+
+      <!-- SVG curved arrows between nodes -->
+      <svg class="eco-wheel-svg" viewBox="0 0 620 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowhead" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="rgba(0,180,219,0.55)"/>
+          </marker>
+          <filter id="glow-line">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- orbit ring (dashed guide) -->
+        <circle cx="310" cy="310" r="220" stroke="rgba(0,180,219,0.08)" stroke-width="1" stroke-dasharray="6 10"/>
+        <!-- 6 curved arc arrows between nodes (clockwise) -->
+        <!-- n0(310,90) → n1(500,245) -->
+        <path d="M 385 118 A 220 220 0 0 1 483 218" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+        <!-- n1(500,245) → n2(500,375) -->
+        <path d="M 507 320 A 220 220 0 0 1 500 370" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+        <!-- n2(500,375) → n3(310,530) -->
+        <path d="M 476 422 A 220 220 0 0 1 385 503" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+        <!-- n3(310,530) → n4(120,375) -->
+        <path d="M 237 503 A 220 220 0 0 1 144 422" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+        <!-- n4(120,375) → n5(120,245) -->
+        <path d="M 113 370 A 220 220 0 0 1 120 318" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+        <!-- n5(120,245) → n0(310,90) -->
+        <path d="M 144 198 A 220 220 0 0 1 237 117" stroke="rgba(0,180,219,0.45)" stroke-width="1.5" stroke-dasharray="5 6" marker-end="url(#arrowhead)" filter="url(#glow-line)"/>
+      </svg>
+
+      <!-- Centre -->
+      <div class="eco-center">
+        <span class="eco-center-icon">♻️</span>
+        <div class="eco-center-label">Zero<br>Waste<br>Cycle</div>
+      </div>
+
+      <!-- 6 orbit nodes -->
+      <div class="eco-orbit-node eco-n0">
+        <span class="eco-step">1</span>
+        <span class="eco-icon">🌱</span>
+        <div class="eco-label">Crops &amp; Trees</div>
+        <div class="eco-sub">Coconut, sesame, groundnut, papaya</div>
+      </div>
+
+      <div class="eco-orbit-node eco-n1">
+        <span class="eco-step">2</span>
+        <span class="eco-icon">🐔</span>
+        <div class="eco-label">Free Range Poultry</div>
+        <div class="eco-sub">Eats insects &amp; fallen fruits</div>
+      </div>
+
+      <div class="eco-orbit-node eco-n2">
+        <span class="eco-step">3</span>
+        <span class="eco-icon">🌿</span>
+        <div class="eco-label">Natural Compost</div>
+        <div class="eco-sub">Droppings enrich soil</div>
+      </div>
+
+      <div class="eco-orbit-node eco-n3">
+        <span class="eco-step">4</span>
+        <span class="eco-icon">🐟</span>
+        <div class="eco-label">Fish Ponds</div>
+        <div class="eco-sub">Fed by farm organic matter</div>
+      </div>
+
+      <div class="eco-orbit-node eco-n4">
+        <span class="eco-step">5</span>
+        <span class="eco-icon">💧</span>
+        <div class="eco-label">Pond Water</div>
+        <div class="eco-sub">Nutrient-rich irrigation</div>
+      </div>
+
+      <div class="eco-orbit-node eco-n5">
+        <span class="eco-step">6</span>
+        <span class="eco-icon">🌾</span>
+        <div class="eco-label">Back to Soil</div>
+        <div class="eco-sub">Zero external inputs needed</div>
+      </div>
+
+    </div><!-- eco-wheel-wrap -->
+
+  </div>
+</section>
+
+<!-- ── POND VIDEO SECTION ─────────────────────────────────────────────── -->
+<div class="pond-video-section reveal">
+  <div class="pond-video-wrap">
+    <video id="pondVideo" autoplay muted loop playsinline>
+      <source src="SM1.mp4" type="video/mp4">
+    </video>
+    <div class="pond-video-overlay"></div>
+    <div class="pond-video-ctrl" id="pondVideoCtrl" onclick="togglePondVideo()">
+      <span class="pvctrl-icon" id="pondVideoIcon">&#9646;&#9646;</span>
+    </div>
+    <div class="pond-video-badge">
+      <span class="pvb-dot"></span>
+      Live Farm &middot; 2 Natural Ponds
+    </div>
+    <div class="pond-video-label">
+      <div class="pvl-eyebrow">Aquaculture</div>
+      <div class="pvl-title">Our Living<br>Fish Ponds</div>
+      <div class="pvl-sub">Zero chemical &middot; Naturally fed &middot; Premium Murrel</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="s-divider"></div>
+</div>
+
+<!-- ── FISH PONDS ──────────────────────────────────────────────────────── -->
+<section class="section fish-section" id="fish-ponds">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Aquaculture</div>
+      <h2 class="section-heading">Two Living<br><em>Fish Ponds</em></h2>
+      <p class="section-desc">Two pristine freshwater ponds, naturally maintained within the farm's zero-chemical ecosystem. Stocked with prized native species including the legendary Murrel.</p>
+    </div>
+
+    <div class="ponds-grid reveal">
+
+      <!-- POND 1 -->
+      <div class="pond-card">
+        <div class="pond-ripple"></div>
+        <div class="pond-number">Pond One</div>
+        <div class="pond-title">The Murrel Pond</div>
+        <div class="pond-desc">Home to the most prized freshwater fish of Tamil Nadu. Murrel — known locally as Viral Meen (விரால் மீன்) — grown in chemical-free, naturally aerated water.</div>
+
+        <div class="fish-list">
+          <div class="fish-item">
+            <span class="fish-emoji">🐟</span>
+            <div class="fish-info">
+              <div class="fish-name">Snakehead Murrel</div>
+              <div class="fish-tamil">விரால் மீன் · Channa striata</div>
+            </div>
+            <span class="fish-badge fish-badge-premium">Premium</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐟</span>
+            <div class="fish-info">
+              <div class="fish-name">Giant Snakehead</div>
+              <div class="fish-tamil">பெரிய விரால் · Channa marulius</div>
+            </div>
+            <span class="fish-badge fish-badge-premium">Rare</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐠</span>
+            <div class="fish-info">
+              <div class="fish-name">Spotted Snakehead</div>
+              <div class="fish-tamil">புள்ளி விரால் · Channa punctata</div>
+            </div>
+            <span class="fish-badge fish-badge-native">Native</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐡</span>
+            <div class="fish-info">
+              <div class="fish-name">Catla (Indian Major Carp)</div>
+              <div class="fish-tamil">தேப்பு / கெண்டை · Catla catla</div>
+            </div>
+            <span class="fish-badge fish-badge-native">Native</span>
+          </div>
+        </div>
+
+        <div class="pond-stats">
+          <div class="pond-stat">
+            <div class="pond-stat-val">~0.2 Ha</div>
+            <div class="pond-stat-lbl">Pond Size</div>
+          </div>
+          <div class="pond-stat">
+            <div class="pond-stat-val">1.5m</div>
+            <div class="pond-stat-lbl">Water Depth</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- POND 2 -->
+      <div class="pond-card">
+        <div class="pond-ripple"></div>
+        <div class="pond-number">Pond Two</div>
+        <div class="pond-title">The Community Pond</div>
+        <div class="pond-desc">A diverse freshwater ecosystem with multiple native species. Naturally fed by farm irrigation runoff — no external feed or chemicals ever used.</div>
+
+        <div class="fish-list">
+          <div class="fish-item">
+            <span class="fish-emoji">🐟</span>
+            <div class="fish-info">
+              <div class="fish-name">Rohu (Indian Rohu)</div>
+              <div class="fish-tamil">ரோகு கெண்டை · Labeo rohita</div>
+            </div>
+            <span class="fish-badge fish-badge-native">Native</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐠</span>
+            <div class="fish-info">
+              <div class="fish-name">Tilapia</div>
+              <div class="fish-tamil">ஜிலாபி கெண்டை · Oreochromis sp.</div>
+            </div>
+            <span class="fish-badge fish-badge-native">Hardy</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐡</span>
+            <div class="fish-info">
+              <div class="fish-name">Dwarf Snakehead Murrel</div>
+              <div class="fish-tamil">சிறு விரால் · Channa gachua</div>
+            </div>
+            <span class="fish-badge fish-badge-premium">Native</span>
+          </div>
+          <div class="fish-item">
+            <span class="fish-emoji">🐟</span>
+            <div class="fish-info">
+              <div class="fish-name">Catfish (Air-Breathing)</div>
+              <div class="fish-tamil">கெழுத்தி மீன் · Clarias sp.</div>
+            </div>
+            <span class="fish-badge fish-badge-native">Native</span>
+          </div>
+        </div>
+
+        <div class="pond-stats">
+          <div class="pond-stat">
+            <div class="pond-stat-val">~0.2 Ha</div>
+            <div class="pond-stat-lbl">Pond Size</div>
+          </div>
+          <div class="pond-stat">
+            <div class="pond-stat-val">Zero</div>
+            <div class="pond-stat-lbl">Chemicals</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- ponds-grid -->
+
+    <div class="fish-highlight-strip reveal">
+      <div class="fish-highlight-icon">🐟</div>
+      <div class="fish-highlight-text">
+        <div class="fish-highlight-title">Why Our Murrel is Different</div>
+        <div class="fish-highlight-desc">
+          Murrel (Viral Meen — விரால் மீன்) is revered in Tamil Nadu for its near-boneless, protein-rich flesh and rich taste. Ours are raised in zero-chemical, farm-integrated ponds — fed entirely by natural organic matter from the farm ecosystem. No pellets, no hormones, no stress. Just pure water and nature's way.
+        </div>
+        <div class="fish-highlight-tags">
+          <span class="fht">🌿 Zero Chemical</span>
+          <span class="fht">💊 No Hormones</span>
+          <span class="fht">🐟 Air-Breathing Species</span>
+          <span class="fht">🏆 High Market Value</span>
+          <span class="fht">❤️ Rich in Omega-3</span>
+          <span class="fht">🍽 Near Boneless</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="s-divider"></div>
+</div>
+
+<!-- ── PRODUCTS ────────────────────────────────────────────────────────── -->
+<section class="section" id="products">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">B2C Product Range</div>
+      <h2 class="section-heading">Complete <em>Farm Products</em></h2>
+      <p class="section-desc">Everything grown, pressed, and packed on the farm — direct to your home. No middlemen, no markup, no compromise.</p>
+    </div>
+
+    <div class="products-grid reveal">
+
+      <div class="product-card">
+        <span class="pc-emoji">🛢️</span>
+        <div class="pc-name">Cold Press Oils</div>
+        <ul class="pc-list">
+          <li>Sesame oil 500ml <span class="pc-price">₹450–600</span></li>
+          <li>Coconut oil 1L <span class="pc-price">₹700–1000</span></li>
+          <li>Castor oil 500ml <span class="pc-price">₹400–600</span></li>
+          <li>Moringa seed oil 100ml <span class="pc-price">₹500–1500</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🌿</span>
+        <div class="pc-name">Spices</div>
+        <ul class="pc-list">
+          <li>Whole pepper <span class="pc-price">₹800–1200/100g</span></li>
+          <li>Pepper powder <span class="pc-price">₹600–900/100g</span></li>
+          <li>Nutmeg whole <span class="pc-price">₹500–900/pack</span></li>
+          <li>Nutmeg powder <span class="pc-price">₹400–700/100g</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🍈</span>
+        <div class="pc-name">Papaya</div>
+        <ul class="pc-list">
+          <li>Fresh papaya 2kg <span class="pc-price">₹150–250</span></li>
+          <li>Dried strips 200g <span class="pc-price">₹500–700</span></li>
+          <li>Seed powder 100g <span class="pc-price">₹600–900</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🌿</span>
+        <div class="pc-name">Herbal Powders</div>
+        <ul class="pc-list">
+          <li>Curry leaf powder 100g <span class="pc-price">₹600–900</span></li>
+          <li>Drumstick powder 100g <span class="pc-price">₹400–600</span></li>
+          <li>Lemongrass powder 100g <span class="pc-price">₹400–600</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🍯</span>
+        <div class="pc-name">Honey &amp; Tea</div>
+        <ul class="pc-list">
+          <li>Raw farm honey 500g <span class="pc-price">₹500–750</span></li>
+          <li>Lemongrass dried tea <span class="pc-price">₹300–500/100g</span></li>
+          <li>Herbal combo tea pack <span class="pc-price">₹800–1200</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🐔</span>
+        <div class="pc-name">Nattu Kozhi</div>
+        <ul class="pc-list">
+          <li>Live country chicken <span class="pc-price">Market rate</span></li>
+          <li>Native farm eggs (tray/12) <span class="pc-price">₹120–180</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🐟</span>
+        <div class="pc-name">Fresh Fish</div>
+        <ul class="pc-list">
+          <li>Live Murrel (Viral Meen) <span class="pc-price">₹400–600/kg</span></li>
+          <li>Rohu / Catla <span class="pc-price">Market rate</span></li>
+          <li>Tilapia / Catfish <span class="pc-price">Market rate</span></li>
+        </ul>
+      </div>
+
+      <div class="product-card">
+        <span class="pc-emoji">🎁</span>
+        <div class="pc-name">Combo Packs</div>
+        <ul class="pc-list">
+          <li>Oil Trio (3×500ml) <span class="pc-price">₹1800–2500</span></li>
+          <li>Wellness Box <span class="pc-price">₹2000–3000</span></li>
+          <li>Festival Hamper <span class="pc-price">₹3000–5000</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="s-divider"></div>
+</div>
+
+<!-- ── CROP CALENDAR ──────────────────────────────────────────────────── -->
+<section class="section" id="calendar">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Seasonal Planning</div>
+      <h2 class="section-heading">Crop Rotation<br><em>Calendar</em></h2>
+      <p class="section-desc">Our oil crop strips rotate continuously so the soil never rests and every strip is always productive.</p>
+    </div>
+
+    <div class="cal-shell reveal">
+      <div class="cal-scroll">
+      <table class="cal-table">
+        <thead>
+          <tr>
+            <th class="th-month">Month</th>
+            <th class="th-strip">🛢 Strip 1</th>
+            <th class="th-strip">🛢 Strip 2</th>
+            <th class="th-strip">🛢 Strip 3</th>
+            <th class="th-strip">🛢 Strip 4</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-month">Jan</td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Feb</td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Mar</td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Apr</td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">May</td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Jun</td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Jul</td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Aug</td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Sep</td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Oct</td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rest">— Rest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Nov 🌧</td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rain">🌧 Rain</div></td>
+            <td class="td-cell"><div class="cal-pill pill-harvest">🌾 Harvest</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+          </tr>
+          <tr>
+            <td class="td-month">Dec 🌧</td>
+            <td class="td-cell"><div class="cal-pill pill-rain">🌧 Rain</div></td>
+            <td class="td-cell"><div class="cal-pill pill-groundnut">🥜 Groundnut</div></td>
+            <td class="td-cell"><div class="cal-pill pill-sesame">🌱 Sesame</div></td>
+            <td class="td-cell"><div class="cal-pill pill-rain">🌧 Rain</div></td>
+          </tr>
+        </tbody>
+      </table>
+      </div><!-- cal-scroll -->
+      <div class="cal-legend">
+        <div class="cal-leg-item"><div class="cal-dot" style="background:rgba(245,200,66,0.6)"></div>🌾 Harvest</div>
+        <div class="cal-leg-item"><div class="cal-dot" style="background:rgba(0,212,170,0.5)"></div>🌱 Plant Sesame</div>
+        <div class="cal-leg-item"><div class="cal-dot" style="background:rgba(180,120,50,0.55)"></div>🥜 Plant Groundnut</div>
+        <div class="cal-leg-item"><div class="cal-dot" style="background:rgba(0,180,219,0.45)"></div>🌧 Rain Season</div>
+        <div class="cal-leg-item"><div class="cal-dot" style="background:rgba(255,255,255,0.08)"></div>— Soil Rest</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section" style="padding-top:0;padding-bottom:0;">
+  <div class="s-divider"></div>
+</div>
+
+<!-- ── CONTACT ─────────────────────────────────────────────────────────── -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Find Us</div>
+      <h2 class="section-heading">Visit the <em>Farm</em></h2>
+      <p class="section-desc">Come experience the farm. Walk the orchards, see the ponds, taste what truly organic means.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+
+      <div class="contact-info">
+        <div class="contact-heading">Sudalai Madan<br>Organic Farm</div>
+        <div class="contact-sub">Rooted in Vasavappapuram. Growing for the nation.</div>
+
+        <div class="contact-detail">
+          <div class="contact-icon-box">📍</div>
+          <div>
+            <div class="contact-detail-label">Address</div>
+            <div class="contact-detail-value">
+              Vasavappapuram,<br>
+              Near Perumal Kovil,<br>
+              Vallanadu Via,<br>
+              Tuticorin Dt,<br>
+              Tamil Nadu — 628 252, India
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon-box">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">
+              <a href="mailto:nellaisubbiah@yahoo.in">nellaisubbiah@yahoo.in</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-icon-box">🕐</div>
+          <div>
+            <div class="contact-detail-label">Farm Visits</div>
+            <div class="contact-detail-value">
+              Open daily · 7 AM – 6 PM<br>
+              <span style="color:rgba(232,244,252,0.45);font-size:12px;">Please email ahead to schedule a visit</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="mailto:nellaisubbiah@yahoo.in" class="btn-primary" style="margin-top:8px;display:inline-flex;">
+          ✉ Send a Message
+        </a>
+      </div>
+
+      <div class="contact-map-placeholder">
+        <div class="contact-map-icon">🗺</div>
+        <div class="contact-map-title">Vasavappapuram<br>Vallanadu, Tuticorin Dt</div>
+        <div class="contact-map-sub">
+          Near Perumal Kovil, Vallanadu Via<br>
+          Tamil Nadu — PIN 628 252
+        </div>
+        <div class="contact-visit-tags">
+          <span class="cvt">🚗 38km from Tuticorin</span>
+          <span class="cvt">🚂 Near Seydunganallur Rly</span>
+          <span class="cvt">✈️ 22km from Thoothukudi Airport</span>
+        </div>
+        <a href="https://maps.google.com/?q=Vasavappapuram+Vallanadu+Tuticorin+Tamil+Nadu" target="_blank" class="btn-primary" style="margin-top:8px;">
+          Open in Maps →
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">Sudalai Madan <span>Organic Farm</span></div>
+        <div class="footer-brand-sub">Vasavappapuram · Tuticorin · Tamil Nadu</div>
+        <div class="footer-tagline">"Grown by us. Pressed by us.<br>Delivered to you — pure."</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#farm-layout">Farm Layout</a></li>
+          <li><a href="#ecosystem">Zero Waste Ecosystem</a></li>
+          <li><a href="#fish-ponds">Fish Ponds</a></li>
+          <li><a href="#products">B2C Products</a></li>
+          <li><a href="#calendar">Crop Calendar</a></li>
+          <li><a href="#contact">Contact &amp; Visit</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="#products">Cold Press Oils</a></li>
+          <li><a href="#products">Nattu Kozhi &amp; Eggs</a></li>
+          <li><a href="#products">Live Fish (Murrel)</a></li>
+          <li><a href="#products">Herbal Powders</a></li>
+          <li><a href="#products">Raw Farm Honey</a></li>
+          <li><a href="#products">Festival Hampers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Sudalai Madan Organic Farm · Vasavappapuram, Tuticorin Dt, Tamil Nadu 628 252</div>
+      <div class="footer-badges">
+        <span class="footer-badge">🌿 Zero Chemical</span>
+        <span class="footer-badge">✦ 100% B2C</span>
+        <span class="footer-badge">🐟 Live Ponds</span>
+        <span class="footer-badge">📧 nellaisubbiah@yahoo.in</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── FLOATING ACTION BUTTONS ──────────────────────────────────────────── -->
+<div class="fab-group">
+  <button class="fab fab-up" id="fabUp" onclick="scrollToTop()" title="Back to top">↑</button>
+  <a href="mailto:nellaisubbiah@yahoo.in" class="fab fab-email" title="Email us">✉</a>
+  <button class="fab fab-chat" id="fabChat" onclick="toggleChat()" title="Chat with us">💬</button>
+</div>
+
+<!-- ── CHATBOT ──────────────────────────────────────────────────────────── -->
+<div class="chatbot-window" id="chatbot">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar">🌿</div>
+    <div>
+      <div class="chatbot-title">Farm Assistant</div>
+      <div class="chatbot-status"><span class="chatbot-online"></span> Online — Sudalai Madan Farm</div>
+    </div>
+    <button class="chatbot-close-btn" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages">
+    <div class="chat-msg chat-msg-bot">
+      👋 Welcome to Sudalai Madan Organic Farm! I can help you with product info, farm visits, and more.
+    </div>
+    <div class="chat-msg chat-msg-bot">
+      What would you like to know? 🌿
+    </div>
+  </div>
+  <div class="chat-quick-btns">
+    <button class="chat-quick-btn" onclick="quickReply('How can I visit the farm?')">🗺 Visit Farm</button>
+    <button class="chat-quick-btn" onclick="quickReply('What products do you sell?')">🛒 Products</button>
+    <button class="chat-quick-btn" onclick="quickReply('Tell me about your fish ponds')">🐟 Fish Ponds</button>
+    <button class="chat-quick-btn" onclick="quickReply('Do you deliver to my city?')">🚚 Delivery</button>
+  </div>
+  <div class="chatbot-input-row">
+    <input class="chatbot-input" id="chatInput" type="text" placeholder="Ask about the farm…" onkeypress="if(event.key==='Enter')sendChat()">
+    <button class="chatbot-send" onclick="sendChat()">↗</button>
+  </div>
+</div>
+
+<!-- ── JS ────────────────────────────────────────────────────────────────── -->
+<script>
+// ── NAV HAMBURGER ──
+let navOpen = false;
+function toggleNav() {
+  navOpen = !navOpen;
+  const panel = document.getElementById('mobilePanel');
+  const burger = document.getElementById('hamburger');
+  panel.classList.toggle('open', navOpen);
+  burger.classList.toggle('open', navOpen);
+}
+function closeNav() {
+  navOpen = false;
+  document.getElementById('mobilePanel').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+// Close on outside click
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('mobilePanel');
+  const burger = document.getElementById('hamburger');
+  if (navOpen && !panel.contains(e.target) && !burger.contains(e.target)) {
+    closeNav();
+  }
+});
+
+// ── SCROLL-TRIGGERED REVEALS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── FAB UP BUTTON ──
+window.addEventListener('scroll', () => {
+  const fab = document.getElementById('fabUp');
+  if (window.scrollY > 400) fab.classList.add('visible');
+  else fab.classList.remove('visible');
+});
+function scrollToTop() {
+  window.scrollTo({ top:0, behavior:'smooth' });
+}
+
+// ── POND VIDEO TOGGLE ──
+let pondPlaying = true;
+function togglePondVideo() {
+  const v = document.getElementById('pondVideo');
+  const icon = document.getElementById('pondVideoIcon');
+  if (pondPlaying) { v.pause(); icon.textContent = '▶'; pondPlaying = false; }
+  else { v.play(); icon.textContent = '⏸'; pondPlaying = true; }
+}
+
+// ── PHOTO STRIP DRAG SCROLL ──
+const strip = document.getElementById('photoStrip');
+if (strip) {
+  let isDown = false, startX, scrollLeft;
+  strip.addEventListener('mousedown', (e) => { isDown=true; startX=e.pageX-strip.offsetLeft; scrollLeft=strip.scrollLeft; });
+  strip.addEventListener('mouseleave', () => { isDown=false; });
+  strip.addEventListener('mouseup', () => { isDown=false; });
+  strip.addEventListener('mousemove', (e) => { if(!isDown)return; e.preventDefault(); const x=e.pageX-strip.offsetLeft; strip.scrollLeft=scrollLeft-(x-startX)*2; });
+}
+
+// ── CHATBOT ──
+let chatOpen = false;
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatbot').classList.toggle('open', chatOpen);
+}
+
+const botReplies = {
+  'visit':  '📍 We are located at Vasavappapuram, Near Perumal Kovil, Vallanadu Via, Tuticorin Dt — 628 252. Email nellaisubbiah@yahoo.in to schedule a visit. We are open daily 7 AM – 6 PM! 🌿',
+  'product': '🌿 We sell Cold Press Oils, Nattu Kozhi & Eggs, Live Fish (Murrel / Viral Meen), Spices, Herbal Powders, Raw Honey, and Festival Hampers. Check the Products section above! 🛒',
+  'fish': '🐟 We have 2 live freshwater ponds! Pond 1 has premium Murrel (Viral Meen — விரால் மீன்), Catla, Giant Snakehead. Pond 2 has Rohu, Tilapia, Catfish & Dwarf Murrel. All raised with zero chemicals! 💧',
+  'deliver': '🚚 We deliver across Tamil Nadu. Email us at nellaisubbiah@yahoo.in with your location and requirements. WhatsApp ordering available too!',
+  'oil': '🛢️ Our cold-press oils are made in-house: Sesame (₹450–600), Coconut (₹700–1000/L), Castor (₹400–600), Moringa seed oil (₹500–1500). 100% cold-pressed, zero chemicals!',
+  'chicken': '🐔 We raise free-range Nattu Kozhi (country chicken) that roam the entire 10-acre farm. Fresh native eggs available too! Contact us for current rates.',
+  'murrel': '🐟 Murrel (விரால் மீன் — Viral Meen) is our prized fish. Near-boneless, rich in Omega-3, and raised in our zero-chemical ponds. Available live — highly sought after in Tamil Nadu at ₹400–600/kg.',
+  'default': '🙏 Thank you for your interest in Sudalai Madan Organic Farm! For specific enquiries please email us at nellaisubbiah@yahoo.in — we respond within a day. 🌿'
+};
+
+function getReply(msg) {
+  msg = msg.toLowerCase();
+  if (msg.includes('visit') || msg.includes('come') || msg.includes('address') || msg.includes('where')) return botReplies.visit;
+  if (msg.includes('product') || msg.includes('buy') || msg.includes('sell') || msg.includes('what do')) return botReplies.product;
+  if (msg.includes('fish') || msg.includes('pond') || msg.includes('aqua')) return botReplies.fish;
+  if (msg.includes('deliver') || msg.includes('ship') || msg.includes('city')) return botReplies.deliver;
+  if (msg.includes('oil')) return botReplies.oil;
+  if (msg.includes('chicken') || msg.includes('egg') || msg.includes('kozhi')) return botReplies.chicken;
+  if (msg.includes('murrel') || msg.includes('viral') || msg.includes('meen')) return botReplies.murrel;
+  return botReplies.default;
+}
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  addMsg(msg, 'user');
+  input.value = '';
+  setTimeout(() => addMsg(getReply(msg), 'bot'), 800);
+}
+
+function quickReply(msg) {
+  addMsg(msg, 'user');
+  setTimeout(() => addMsg(getReply(msg), 'bot'), 700);
+}
+
+function addMsg(text, sender) {
+  const div = document.createElement('div');
+  div.className = `chat-msg chat-msg-${sender === 'user' ? 'user' : 'bot'}`;
+  div.textContent = text;
+  const msgs = document.getElementById('chatMessages');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ── NAV SCROLL EFFECT ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    nav.style.background = 'rgba(6,13,26,0.92)';
+  } else {
+    nav.style.background = 'rgba(6,13,26,0.75)';
+  }
+});
+</script>
+
+</body>
+</html>
